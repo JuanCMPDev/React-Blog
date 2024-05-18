@@ -225,6 +225,9 @@ body{
                     transform: translateX(50%);
                     .toggle-panel{
                         padding: 0;
+                        &.toggle-left{
+                            padding-left: 30px;
+                        }
                     }  
                 }
             }
