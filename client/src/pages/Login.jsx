@@ -1,6 +1,5 @@
 import {useContext, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import axios from 'axios'
 import { AuthContext } from '../context/authContext';
 
 
@@ -22,7 +21,14 @@ const Login = ({pathname}) => {
   }
 
   const handleClick = async (e) => {
-    e.preventDefault()  
+    e.preventDefault()
+
+    console.log(inputs.username.length);
+
+    if (inputs.username.length <= 0) {
+      setError("Username can't be empty.");
+      return;
+    }
     try{
       await login(inputs);
       setError(err = null);
@@ -44,7 +50,7 @@ const Login = ({pathname}) => {
         <input name="password" type="password" placeholder='Password' onChange={handleChange}/>
         <button onClick={handleClick}>login</button>
         {err && <p>{err}</p>}
-        <span>Don't you have an account? <Link to='/register'>register</Link></span>
+        <span>Don't you have an account? <br/> <Link to='/register'>register</Link></span>
       </form>
     </div>
   )

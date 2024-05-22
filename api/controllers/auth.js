@@ -1,54 +1,83 @@
 import {db} from '../db.js'
 import bcrypt from 'bcryptjs'
+import axios from 'axios'
 import jwt from 'jsonwebtoken'
 
-export const register = (req, res) => {
+const validateEmail = email => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+}
 
-    //check existing user
-    const q = "SELECT * FROM blog.users WHERE email = ? OR username = ?;";
-    
-    db.query(q, [req.body.email, req.body.username], (err, data) => {
-        if (err) return res.json(err)
-        if(data.length) return res.status(409).json('user already exists!')
+export const register = async (req, res) => {
 
-        // hash the password and create a user
-        bcrypt.genSalt(10, (err, salt)=>{
-            if(err){
-                console.log(err)
-                return res.status(500).json('error saving data');
-            } 
-            bcrypt.hash(req.body.password, salt, (err, hash) => {
-                if(err){
-                    console.log(err)
-                    return res.status(500).json('error saving data');
-                } 
-                const password = hash;
-                const q = "INSERT INTO blog.users(`username`, `email`, `password`, `role`) VALUES (?, ?, ?, 'reader')";
-                const values = [req.body.username, req.body.email, password]
+    const { username, email, password, recaptchaToken } = req.body;
 
-                db.query(q, [values], (err, data) => {
-                    if(err){
-                    console.log(err)
-                    return res.status(500).json('error saving data');
-                } 
-                    return res.status(200).json('User has been created');
-                })
-            })
-        })
+    if (!username || !email || !password || !recaptchaToken) {
+        return res.status(400).json('All fields are required.');
+    }
 
+    if (!validateEmail(email)) {
+        return res.status(400).json('Invalid email format.');
+    }
 
-    })
+    if (password.length < 6) {
+        return res.status(400).json('Password must be at least 6 characters long.');
+    }
 
+    try {
+        const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify`, null, {
+            params: {
+                secret: '6Lf6WeUpAAAAAOaNHyLy0w04oq3Rr4PBZPhiwxeY',
+                response: recaptchaToken
+            }
+        });
+
+        if (!response.data.success) {
+            return res.status(400).json('Captcha verification failed.');
+        }
+
+        const q = "SELECT * FROM blog.users WHERE email = ? OR username = ?;";
+        db.query(q, [email, username], (err, data) => {
+            if (err) return res.status(500).json('Database error.');
+            if (data.length) return res.status(409).json('User already exists!');
+
+            bcrypt.genSalt(10, (err, salt) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json('Error generating salt.');
+                }
+                bcrypt.hash(password, salt, (err, hash) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json('Error hashing password.');
+                    }
+                    const hashedPassword = hash;
+                    const q = "INSERT INTO blog.users(`username`, `email`, `password`, `role`) VALUES (?, ?, ?, ?)";
+                    const values = [username, email, hashedPassword, 'reader'];
+
+                    db.query(q, values, (err, data) => {
+                        if (err) {
+                            console.log(err);
+                            return res.status(500).json('Error saving user to database.');
+                        }
+                        return res.status(200).json('User has been created.');
+                    });
+                });
+            });
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json('Internal server error.');
+    }
 }
 
 export const login = (req, res) => {
-    //Check if the user exists
+    
     const q = "SELECT username, password, id, role FROM blog.users WHERE username = ?;"
     db.query(q, [req.body.username], (err, [data])=>{
         if(err) return res.json(err);
         if(data === undefined) return res.status(404).json('User not found!');
 
-        //Check password and generate jwt
 
         bcrypt.compare(req.body.password ,data.password)
             .then((passwordCheck)=>{
