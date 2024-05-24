@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Pagination from "../components/Pagination";
+import {LazyLoadImage} from "react-lazy-load-image-component"
+import 'react-loading-skeleton/dist/skeleton.css'
+
+import loading from "../img/loading.webp"
 
 const Home = () => {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -62,7 +66,7 @@ const Home = () => {
         {posts.map((post) => (
           <div className="post" key={post.id}>
             <div className="img">
-              <img src={post.img} alt="post-photo" />
+              <LazyLoadImage src={post.img} threshold={2000} loading="lazy" alt="post-photo" placeholderSrc={loading}/>
             </div>
             <div className="content">
               <Link className="link" to={`/post/${post.id}`}>

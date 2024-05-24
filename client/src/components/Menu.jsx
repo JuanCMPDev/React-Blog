@@ -39,7 +39,9 @@ const Menu = ({category, postId}) => {
 
   return (
     <div className="menu">
-        <h1>Some sugerencies...</h1>
+        <div className="sugerencies">
+          <h1>Related posts</h1>
+        </div>
         {posts.map(post => (
             <div className="post" key={post.id}>
                 <img src={post.img} alt="" />
@@ -47,6 +49,7 @@ const Menu = ({category, postId}) => {
                 <Link to={`/post/${post.id}`}>
                   <button>Read More</button>
                 </Link>
+                <hr />
             </div>
         ))}
     </div>

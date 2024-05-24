@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {Link, NavLink} from 'react-router-dom'
-import Logo from '../img/logo.svg'
+import Logo from '../img/code.svg'
 import { AuthContext } from '../context/authContext';
 
 const links = ['News', 'Tutorials', 'Resources', 'Bootcamps'];
@@ -13,10 +13,11 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <div className='container'>
+      <div className='nav-container'>
         <Link to='/'> 
           <div className="logo">      
-              <img src={Logo} alt=""/>  
+              <img src={Logo} alt=""/>
+              <p className='logo-text'>JuanCDEV</p>
           </div>
         </Link>
         <div className="links">

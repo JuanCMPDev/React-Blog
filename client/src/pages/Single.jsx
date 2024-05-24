@@ -61,7 +61,9 @@ const Single = () => {
   return (
     <div className='single'>
       <div className="content">
-        <img src={post?.img} alt="post-image" />
+        <div className="img-container">
+          <img src={post?.img} alt="post-image" />
+        </div>
         <div className="user">
           {post.userImg && <img src={post.userImg} alt="post=profile-photo" />}
           <div className="info">
