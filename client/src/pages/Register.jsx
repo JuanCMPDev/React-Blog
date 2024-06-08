@@ -31,6 +31,7 @@ const Register = ({ pathname }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setError(null)
 
     // Validaciones
     if (!inputs.username || !inputs.email || !inputs.password) {

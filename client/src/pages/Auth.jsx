@@ -35,11 +35,13 @@ const Auth = () => {
               <h1>Hey there!</h1>
               <img src={loginImg} alt="login-image" className="login-img"/>
               <p>It's nice to see you around</p>
+              <p className="small-screen">Sign in</p>
             </div>
             <div className="toggle-panel toggle-left">
               <h1>Welcome!</h1>
               <img src={logoutImg} alt="login-image" className="login-img"/>
               <p>happy to see a new user</p>
+              <p className="small-screen">Register</p>
             </div>
           </div>
         </div>

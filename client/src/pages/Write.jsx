@@ -87,67 +87,69 @@ const Write = () => {
 
   return (
     <div className="write">
-      <div className="content">
-      <input
-          type="text"
-          placeholder="title"
-          value={editableTitle}
-          onChange={(e) => {
-            setEditableTitle(e.target.value);
-            console.log(editableTitle);
-          }}
-        />
-        <div className="editorContainer">
-          <ReactQuill
-            className="editor"
-            theme="snow"
-            value={value}
-            onChange={setValue}
+      <div className="write-container">
+        <div className="content">
+        <input
+            type="text"
+            placeholder="title"
+            value={editableTitle}
+            onChange={(e) => {
+              setEditableTitle(e.target.value);
+              console.log(editableTitle);
+            }}
           />
-        </div>
-      </div>
-      <div className="menu">
-        <div className="item">
-          <h1>Publish</h1>
-          <span>
-            <b>Status: </b> Draft
-          </span>
-          <span>
-            <b>Visibility: </b> public
-          </span>
-          <input
-            style={{ display: "none" }}
-            type="file"
-            id="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-          <label className="file " htmlFor="file">
-            Upload image
-          </label>
-          <div className="buttons">
-            <button>Save as a draft</button>
-            <button onClick={handleClick}>
-              {locationState ? "Update" : "Publish"}
-            </button>
+          <div className="editorContainer">
+            <ReactQuill
+              className="editor"
+              theme="snow"
+              value={value}
+              onChange={setValue}
+            />
           </div>
         </div>
-        <div className="item">
-          <h1>Category</h1>
-          {categories.map((cat) => (
-            <div className="cat" key={cat}>
-              <input
-                type="radio"
-                name="cat"
-                checked={category === cat}
-                value={cat}
-                id={cat}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-              <label htmlFor={cat}>
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </label>
+        <div className="menu">
+          <div className="item">
+            <h1>Publish</h1>
+            <span>
+              <b>Status: </b> Draft
+            </span>
+            <span>
+              <b>Visibility: </b> public
+            </span>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="file"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <label className="file " htmlFor="file">
+              Upload image
+            </label>
+            <div className="buttons">
+              <button>Save as a draft</button>
+              <button onClick={handleClick}>
+                {locationState ? "Update" : "Publish"}
+              </button>
             </div>
-          ))}
+          </div>
+          <div className="item">
+            <h1>Category</h1>
+            {categories.map((cat) => (
+              <div className="cat" key={cat}>
+                <input
+                  type="radio"
+                  name="cat"
+                  checked={category === cat}
+                  value={cat}
+                  id={cat}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+                <label htmlFor={cat}>
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

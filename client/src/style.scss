@@ -1,8 +1,11 @@
 $lightGreen: #0353a4;
 
+@import 'sass-files/media-queries';
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 @keyframes move {
+
   0%,
   49.99% {
     opacity: 0;
@@ -19,20 +22,37 @@ $lightGreen: #0353a4;
 body {
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  min-height: 100vh;
   font-family: roboto, sans-serif;
   text-decoration: none;
   background-color: #222831;
+  overflow-x: hidden;
+
+  @include small-screen {
+    max-width: 800px;
+  }
+}
+
+#root {
+  min-height: 100%;
 }
 
 .app {
   display: flex;
   justify-content: center;
+  height: 100%;
 
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
     width: 100%;
+    height: 100%;
     //LOGIN & REGISTER PAGES
 
     .link {
@@ -57,29 +77,37 @@ body {
       align-items: center;
       justify-content: center;
       background: rgb(0, 24, 69);
-      background: linear-gradient(
-        34deg,
-        rgba(0, 24, 69, 1) 0%,
-        rgba(0, 0, 0, 1) 49%
-      );
+      background: linear-gradient(34deg,
+          rgba(0, 24, 69, 1) 0%,
+          rgba(0, 0, 0, 1) 49%);
       height: 100vh;
       width: 100vw;
+
+      @include small-screen{
+        position: relative;
+      }
 
       .card {
         border-radius: 30px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
         position: relative;
         overflow: hidden;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.2),
-          rgba(255, 255, 255, 0.1)
-        );
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.1));
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(10px);
         width: 800px;
         max-width: 100%;
         min-height: 650px;
+
+        @include medium-screen{
+          width: 700px;
+        }
+
+        @include small-screen{
+          width: 480px;
+        }
 
         .form-container {
           display: flex;
@@ -91,10 +119,20 @@ body {
           height: 100%;
           transition: all 0.6s ease-in-out;
 
+          @include small-screen{
+            top: 30px;
+          }
+
+          
+
           &.sign-in {
             left: 0;
             width: 50%;
             z-index: 10;
+
+            @include small-screen{
+            width: 100%;
+            }
           }
 
           &.register {
@@ -102,10 +140,17 @@ body {
             width: 50%;
             opacity: 0;
             z-index: 1;
+            @include small-screen{
+              width: 33%;
+              }
           }
 
           h1 {
             color: white;
+
+            @include small-screen{
+              display: none;
+            }
           }
 
           form {
@@ -120,6 +165,23 @@ body {
             border-radius: 3%;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
+
+            @include medium-screen{
+              width: 190px;
+            }
+
+            @include small-screen{
+              padding: 30px;
+              max-height: 380px;
+              gap: 10px;
+              margin-bottom: 0;
+            }
+
+            .grecaptcha-badge{
+              @include small-screen{
+                display: none !important;
+              }
+            }
 
             input {
               font-size: 14px;
@@ -180,8 +242,14 @@ body {
           height: 100%;
           overflow: hidden;
           transition: all 0.6s ease-in-out;
-          border-radius: 100px 0 0 100px;
+          border-radius: 100px 100px 100px 100px;
           z-index: 1000;
+
+          @include small-screen{
+            left: 0;
+            top: -80%;
+            width: 100%;
+          }
 
           .toggle {
             height: 100%;
@@ -217,15 +285,41 @@ body {
               padding: 0 30px;
               text-align: center;
               transform: translateX(0);
+
+              @include small-screen{
+                padding: 0;
+              }
             }
 
             .toggle-left {
               transform: translateX(-200%);
+              .small-screen{
+                display: none;
+
+                @include small-screen{
+                  display: block;
+                  position: relative;
+                  bottom: 0;
+                  font-size: 25px;
+                  font-weight: bold;
+                }
+              }
             }
 
             .toggle-right {
               right: 0px;
               transform: translateX(0);
+              .small-screen{
+                display: none;
+
+                @include small-screen{
+                  display: block;
+                  position: relative;
+                  bottom: -80px;
+                  font-size: 25px;
+                  font-weight: bold;
+                }
+              }
             }
 
             .toggle-left {
@@ -257,6 +351,11 @@ body {
           transform: translateX(-100%);
           border-radius: 0px 150px 100px 0px;
 
+          @include small-screen{
+            border-radius: 100px 100px 100px 100px;
+            transform: translateX(0%);
+           }
+
           .toggle {
             transform: translateX(50%);
 
@@ -265,6 +364,10 @@ body {
 
               &.toggle-left {
                 padding-left: 30px;
+
+                @include small-screen{
+                  padding-left: 0;
+                }
               }
             }
           }
@@ -279,23 +382,37 @@ body {
       background-color: #000;
       text-decoration: none;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      
+
+      @include small-screen {
+        position: fixed;
+        top: 0;
+      }
 
       .nav-container {
+
         padding: 10px 0px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         color: white;
+        width: 1024px;
 
         a {
           text-decoration: none;
         }
 
         .logo {
-          padding-left: 220px;
           display: flex;
           gap: 10px;
+          padding-left: 10px;
+
           .logo-text {
             color: #fff;
             font-size: large;
@@ -303,48 +420,105 @@ body {
             text-decoration: none;
             text-decoration-line: none;
             cursor: pointer;
+
+            @include small-screen {
+              font-size: medium;
+            }
           }
+
           img {
             width: 50px;
             cursor: pointer;
+
+            @include small-screen {
+              width: 40px;
+            }
+          }
+
+          @include medium-screen {
+            padding-left: 30px;
           }
         }
 
         .links {
           display: flex;
           align-items: center;
-          gap: 15px;
-          padding-right: 230px;
+          gap: 8px;
+          overflow: hidden;
 
-          h6 {
-            font-size: 16px;
-            font-weight: 300;
-          }
+          .nav-links {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
 
-          span {
-            cursor: pointer;
-          }
-
-          a:not(:last-child) {
-            &::after {
-              content: "";
-              height: 2px;
-              width: 0%;
-              background-color: #0353a4;
-              display: block;
-              position: relative;
-              top: -34px;
-              transition: width 0.4s ease;
+            @include small-screen {
+              flex-direction: column;
+              gap: 0px;
             }
 
-            &:hover::after {
-              width: 100%;
+            h6 {
+              font-size: 16px;
+              font-weight: 300;
+
+              @include small-screen {
+                font-size: 14px;
+                margin-top: 30px;
+                margin-bottom: 0;
+              }
+            }
+
+            span {
+              cursor: pointer;
+            }
+
+            a {
+              &::after {
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #0353a4;
+                display: block;
+                position: relative;
+                top: -34px;
+                transition: width 0.4s ease;
+
+                @include small-screen {
+                  top: 0;
+                  margin-top: 5px;
+                }
+              }
+
+              &:hover::after {
+                width: 100%;
+              }
             }
           }
 
           .session {
             display: flex;
             gap: 15px;
+            padding-bottom: 1px;
+            margin-left: 2px;
+            overflow: hidden;
+            cursor: pointer;
+
+            @include small-screen {
+              flex-direction: column;
+              margin-top: 10px;
+              padding-bottom: 0;
+            }
+
+            a {
+              padding-bottom: 3px;
+              padding-left: 3px;
+              margin-right: 20px;
+
+              @include small-screen {
+                padding-top: 8px;
+                padding-right: 33px;
+                margin-right: 0;
+              }
+            }
           }
 
           .write-button {
@@ -360,12 +534,97 @@ body {
             border: 1px solid black;
             transition: all;
             transition-duration: 250ms;
+            overflow: hidden;
+            margin-right: 15px;
 
             &:hover,
             &:focus {
               color: #fff;
               background-color: black;
               border: 1px solid #0353a4;
+            }
+
+            @include small-screen {
+              margin-right: 0;
+              margin-top: 20px;
+              margin-left: 5px;
+              border-radius: 2.5px;
+              width: 80px;
+              height: 35px;
+            }
+          }
+
+          @include medium-screen {
+            padding-right: 30px;
+          }
+
+
+
+          @include small-screen {
+            &.off {
+              transform: translateX(100%);
+            }
+            background-color: rgba(51, 51, 51, .95);
+            width: 180px;
+            height: 100%;
+            position: fixed;
+            z-index: 2000;
+            top:71px;
+            right: 0;
+            flex-direction: column;
+            transition: all 0.6s ease;
+            box-shadow: 0px 4px 16px rgba(17, 17, 26, 0.1),
+            0px 8px 24px rgba(17, 17, 26, 0.1),
+            0px 16px 56px rgba(17, 17, 26, 0.1);
+          }
+        }
+
+        .menu {
+          display: none;
+          align-items: center;
+
+          @include small-screen {
+            display: flex;
+          }
+
+
+          .burger {
+            display: none;
+
+            svg {
+              width: 26px;
+              height: auto;
+            }
+
+            @include small-screen {
+              display: block;
+              padding-right: 30px;
+
+              &.off {
+                display: none;
+              }
+            }
+          }
+
+          .close {
+            display: none;
+
+            &.off {
+              display: none;
+            }
+
+            svg {
+              width: 26px;
+              height: auto;
+            }
+
+            @include small-screen {
+              display: block;
+              padding-right: 30px;
+
+              &.off {
+                display: none;
+              }
             }
           }
         }
@@ -376,7 +635,9 @@ body {
 
     footer {
       width: 100%;
-      padding: 20px;
+      margin-top: auto;
+      padding-top: 30px;
+      padding-bottom: 30px;
       font-size: smaller;
       background-color: #000;
       display: flex;
@@ -385,9 +646,18 @@ body {
       color: #fff;
       z-index: 2;
 
+      @include small-screen {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
       img {
         height: 50px;
         margin-bottom: 15px;
+
+        @include small-screen {
+          height: 40px;
+        }
       }
 
       .logo {
@@ -397,10 +667,18 @@ body {
         text-align: center;
         gap: 5px;
 
+        @include small-screen {
+          gap: 10px;
+        }
+
         p {
           position: relative;
           top: -5px;
           font-weight: 800;
+
+          @include small-screen {
+            top: -8px;
+          }
         }
       }
     }
@@ -408,17 +686,33 @@ body {
     // HOME PAGE
 
     .home {
-      max-width: 1024px;
+      width: 1024px;
       background-color: #fff;
-      padding-top: 30px;
+      padding-top: 10px;
       padding-bottom: 30px;
       box-shadow: 0 8px 30px rgb(0, 0, 0, 0.12);
+
+
+      @include medium-screen {
+        max-width: 800px;
+      }
+
+      @include small-screen {
+        max-width: 90%;
+        margin-top: 80px;
+        margin-bottom: 10px;
+      }
 
       .posts {
         margin-top: 50px;
         display: flex;
         flex-direction: column;
         gap: 150px;
+        overflow: hidden;
+
+        @include small-screen {
+          gap: 90px;
+        }
 
         .post {
           display: flex;
@@ -426,8 +720,23 @@ body {
           padding-left: 75px;
           padding-right: 75px;
 
+          @include small-screen {
+            gap: 50px;
+            padding-left: 30px;
+            padding-right: 30px;
+            align-items: center;
+          }
+
+          @include extra-small-screen {
+            flex-direction: column;
+          }
+
           &:nth-child(2n + 1) {
             flex-direction: row-reverse;
+
+            @include extra-small-screen {
+              flex-direction: column;
+            }
           }
 
           .img {
@@ -443,6 +752,12 @@ body {
               box-shadow: 0px 4px 16px rgba(17, 17, 26, 0.1),
                 0px 8px 24px rgba(17, 17, 26, 0.1),
                 0px 16px 56px rgba(17, 17, 26, 0.1);
+
+              @include small-screen {
+                max-height: 200px;
+                min-height: 200px;
+                min-width: 200px;
+              }
             }
           }
 
@@ -452,14 +767,31 @@ body {
             justify-content: center;
             flex: 3;
 
+            @include extra-small-screen {
+              align-items: center;
+            }
+
+
             h1 {
               font-size: 48px;
               margin: 0;
+
+              @include small-screen {
+                font-size: 25px;
+              }
+
+              @include extra-small-screen {
+                font-size: 25px;
+              }
             }
 
             p {
               font-size: 18px;
               text-align: justify;
+
+              @include small-screen {
+                font-size: 14px;
+              }
             }
 
             button {
@@ -476,6 +808,11 @@ body {
                 background-color: #0353a4;
                 color: #fff;
               }
+
+              @include small-screen {
+                font-size: 12px;
+                padding: 5px 10px;
+              }
             }
           }
         }
@@ -490,6 +827,11 @@ body {
         height: 40px;
         gap: 10px;
 
+        @include small-screen {
+          height: 30px;
+          gap: 8px;
+        }
+
         .pagination-btn {
           border: none;
           border-radius: 50%;
@@ -501,8 +843,13 @@ body {
           cursor: pointer;
           transition: all 0.3s ease-in-out;
 
+          @include small-screen {
+            width: 30px;
+            height: 30px;
+            font-size: 12px;
+          }
+
           &:hover {
-            border: 1px solid white;
             background-color: $lightGreen;
             color: white;
           }
@@ -511,7 +858,7 @@ body {
         .active {
           color: white;
           background-color: $lightGreen;
-          border: 1px solid white;
+          border: 1px solid $lightGreen;
         }
       }
     }
@@ -526,6 +873,20 @@ body {
       display: flex;
       box-shadow: 0 8px 30px rgb(0, 0, 0, 0.12);
 
+      @include medium-screen {
+        max-width: 775px;
+      }
+
+      @include small-screen {
+        max-width: 90%;
+        margin-top: 80px;
+        margin-bottom: 10px;
+        padding-top: 40px;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 20px;
+      }
+
       .content {
         display: flex;
         flex-direction: column;
@@ -533,11 +894,40 @@ body {
         padding-left: 75px;
         padding-right: 75px;
 
+        @include medium-screen {
+          padding-left: 40px;
+          padding-right: 0px;
+        }
+
+        @include small-screen {
+          padding-left: 30px;
+          padding-left: 0;
+        }
+
+        @include extra-small-screen {
+          padding-left: 0;
+          align-items: center;
+        }
+
         .img-container {
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-            position: relative;
+          width: 550px;
+          height: auto;
+          max-height: 400px;
+          overflow: hidden;
+          position: relative;
+
+          @include medium-screen {
+            width: 450px;
+          }
+
+          @include small-screen {
+            width: 400px;
+          }
+
+          @include extra-small-screen {
+            width: 300px;
+          }
+
           img {
             width: 100%;
             height: auto;
@@ -554,6 +944,10 @@ body {
           font-size: 14px;
           margin-top: 10px;
 
+          @include extra-small-screen {
+            gap: 30px;
+          }
+
           img {
             width: 50px;
             height: 50px;
@@ -563,6 +957,7 @@ body {
           }
 
           .info {
+
             span {
               font-weight: bold;
             }
@@ -575,7 +970,7 @@ body {
             flex-direction: column;
             align-items: right;
             justify-content: center;
-            gap: 0;
+            gap: 5px;
           }
 
           .edit {
@@ -602,6 +997,18 @@ body {
                 top: -1px;
                 color: #013a63;
                 font-size: 19px;
+
+                @include extra-small-screen {
+                  font-size: 15px;
+                  right: -2;
+                  top: 0;
+                  bottom: -2;
+                }
+              }
+
+              @include extra-small-screen {
+                width: 30px;
+                height: 30px;
               }
             }
 
@@ -619,6 +1026,17 @@ body {
               svg {
                 color: rgb(225, 42, 42);
                 font-size: 20px;
+
+                @include extra-small-screen {
+                  position: absolute;
+                  font-size: 17px;
+                  right: 6px;
+                }
+              }
+
+              @include extra-small-screen {
+                width: 30px;
+                height: 30px;
               }
             }
           }
@@ -627,12 +1045,37 @@ body {
         h1 {
           font-size: 38px;
           color: #333;
+
+          @include medium-screen {
+            font-size: 30px;
+          }
+
+          @include extra-small-screen {
+            font-size: 28px;
+          }
+
+
         }
 
         p {
           margin: 0;
           text-align: justify;
           line-height: 30px;
+
+          @include medium-screen {
+            max-width: 450px;
+            font-size: 14px;
+            line-height: 20px;
+          }
+
+          @include small-screen {
+            max-width: 400px;
+          }
+
+          @include extra-small-screen {
+            max-width: 275px;
+          }
+
         }
       }
 
@@ -644,15 +1087,51 @@ body {
         padding-left: 40px;
         padding-right: 40px;
 
+        @include medium-screen {
+          padding-left: 0px;
+          padding-right: 40px;
+        }
+
+        @include small-screen {
+          padding-right: 0;
+          margin: 30px 50px;
+          max-width: 200px;
+          max-height: fit-content;
+          align-items: center;
+        }
+
         h1 {
           font-size: 22px;
           padding: 20px;
           color: white;
+
+          @include small-screen {
+            padding: 10px;
+            margin: 0;
+          }
+
+          @include extra-small-screen {}
         }
 
         .sugerencies {
           text-align: center;
           background-color: #000;
+        }
+
+        .posts {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          @include small-screen {
+            padding-top: 20px;
+            flex-direction: row;
+          }
+
+          @include extra-small-screen {
+            flex-wrap: wrap;
+            gap: 10px;
+          }
         }
 
         .post {
@@ -661,9 +1140,31 @@ body {
           gap: 5px;
           align-items: center;
 
+          @include small-screen {
+            height: 100%;
+            justify-content: space-between;
+          }
+
+          @include extra-small-screen {
+            display: row;
+            height: 320px;
+            min-width: 200px;
+          }
+
+
           h2 {
             font-size: 20px;
             color: #333;
+
+            @include small-screen {
+              font-size: 15px;
+              margin-bottom: auto;
+            }
+
+            @include extra-small-screen {
+              margin-top: 0px;
+              margin-bottom: 0px;
+            }
           }
 
           img {
@@ -671,6 +1172,10 @@ body {
             height: 200px;
             object-fit: fit;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+            @include small-screen {
+              height: 150px;
+            }
           }
 
           button {
@@ -681,6 +1186,10 @@ body {
             cursor: pointer;
             color: #01497c;
             transition: all 0.3s ease-in-out;
+
+            @include small-screen {
+              margin-top: 10px
+            }
 
             &:hover {
               border: 1px solid white;
@@ -693,99 +1202,152 @@ body {
     }
 
     .write {
-      width: 1024px;
-      padding-top: 65px;
-      padding-bottom: 65px;
-      background-color: #fff;
       display: flex;
-      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
 
-      .content {
-        padding-left: 40px;
-        padding-bottom: 40px;
-        display: flex;
-        flex: 5;
-        flex-direction: column;
-        gap: 20px;
-
-        input {
-          padding: 10px;
-          border: 1px solid lightgray;
-        }
-
-        .editorContainer {
-          height: 300px;
-          overflow: scroll;
-          border: 1px solid lightgray;
-
-          .editor {
-            height: 100%;
-            border: none;
-          }
-        }
+      @include small-screen{
+        max-width: 100%;
+        min-height: 100vh;
       }
 
-      .menu {
-        padding-right: 40px;
-        flex: 2;
+      @include extra-small-screen{
+        margin-top: 71px;
+      }
+
+      .write-container {
+
+        width: 1024px;
+        padding-top: 65px;
+        padding-bottom: 65px;
+        background-color: #fff;
         display: flex;
-        flex-direction: column;
         gap: 20px;
 
-        .item {
-          border: 1px solid lightgray;
-          padding: 10px;
-          flex: 1;
-          display: flex;
+        @include medium-screen {
+          max-width: 775px;
+        }
+  
+        @include small-screen {
+          max-width: 70%;
           flex-direction: column;
-          justify-content: space-between;
-          font-size: 12px;
-          color: #555;
+          align-items: center;
+          padding-left: 30px;
+          padding-right: 30px;
+        }
 
-          h1 {
-            font-size: 20px;
-            color: #555;
+        .content {
+          padding-left: 40px;
+          padding-bottom: 40px;
+          display: flex;
+          flex: 5;
+          flex-direction: column;
+          gap: 20px;
+
+          @include small-screen{
             padding: 0;
-            margin: 0;
           }
 
-          .file {
-            text-decoration: underline;
-            cursor: pointer;
+          input {
+            padding: 10px;
+            border: 1px solid lightgray;
           }
 
-          .buttons {
-            display: flex;
-            justify-content: space-between;
+          .editorContainer {
+            height: 300px;
+            overflow: scroll;
+            border: 1px solid lightgray;
 
-            :first-child {
-              font-size: 12px;
-              cursor: pointer;
-              color: #0353a4;
-              background-color: white;
-              border: 1px solid #0353a4;
-              padding: 3px 5px;
-              transition: all 0.1s ease-in-out;
+           
+
+
+            .editor {
+              height: 100%;
+              border: none;
             }
-
-            :last-child {
-              font-size: 12px;
-              cursor: pointer;
-              color: white;
-              background-color: #0353a4;
-              border: 1px solid #0353a4;
-              padding: 3px 5px;
-              transition: all 0.1s ease-in-out;
-            }
-          }
-
-          .cat {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: #0353a4;
           }
         }
+
+        .menu {
+          padding-right: 40px;
+          flex: 2;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          @include small-screen{
+            padding: 0;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+          }
+
+          @include extra-small-screen{
+            flex-direction: column;
+          }
+
+          .item {
+            border: 1px solid lightgray;
+            padding: 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #555;
+
+            @include small-screen{
+              min-height: 150px;
+              min-width: 150px;
+            }
+
+            h1 {
+              font-size: 20px;
+              color: #555;
+              padding: 0;
+              margin: 0;
+            }
+
+            .file {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+
+            .buttons {
+              display: flex;
+              justify-content: space-between;
+
+              :first-child {
+                font-size: 12px;
+                cursor: pointer;
+                color: #0353a4;
+                background-color: white;
+                border: 1px solid #0353a4;
+                padding: 3px 5px;
+                transition: all 0.1s ease-in-out;
+              }
+
+              :last-child {
+                font-size: 12px;
+                cursor: pointer;
+                color: white;
+                background-color: #0353a4;
+                border: 1px solid #0353a4;
+                padding: 3px 5px;
+                transition: all 0.1s ease-in-out;
+              }
+            }
+
+            .cat {
+              display: flex;
+              align-items: center;
+              gap: 20px;
+              color: #0353a4;
+            }
+          }
+        }
+
       }
     }
   }
