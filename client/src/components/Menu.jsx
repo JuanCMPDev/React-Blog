@@ -24,11 +24,7 @@ const Menu = ({category, postId}) => {
       try {
         const res = await axios.get(url);
         const originalPosts = res.data.posts;
-        console.log(originalPosts);
-        console.log(postId);
         const filteredPosts = originalPosts.filter(post => post.id !== parseInt(postId)).slice(0, 3);
-        console.log(filteredPosts);
-        console.log(filteredPosts);
         setPosts(filteredPosts);
       } catch (err) {
         console.log(err);

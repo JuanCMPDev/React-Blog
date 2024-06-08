@@ -13,6 +13,9 @@ const Register = ({ pathname }) => {
   const [err, setError] = useState(null);
   const recaptchaRef = useRef(null);
 
+  // Importar la variable de entorno
+  const reCaptchaKey = import.meta.env.VITE_RECAPTCHA_KEY;
+
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -31,7 +34,7 @@ const Register = ({ pathname }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    setError(null)
+    setError(null);
 
     // Validaciones
     if (!inputs.username || !inputs.email || !inputs.password) {
@@ -84,7 +87,7 @@ const Register = ({ pathname }) => {
         <input required type="email" name='email' placeholder='Email' onChange={handleChange} />
         <input required type="password" name='password' placeholder='Password' onChange={handleChange} />
         <ReCAPTCHA
-          sitekey='6Lf6WeUpAAAAAF5w6w-TuCeIt3HubkNooieoJVPU'
+          sitekey={reCaptchaKey}
           size='invisible'
           ref={recaptchaRef}
           onChange={onCaptchaChange}

@@ -2,8 +2,10 @@ import { initializeApp } from "firebase/app";
 import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 
+const firebaseKey = import.meta.env.VITE_FIREBASE_KEY;
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDR6w-iTdME2EJ_kd_jEIVg-PYI9YwipBA",
+    apiKey: firebaseKey,
     authDomain: "react-blog-b29eb.firebaseapp.com",
     projectId: "react-blog-b29eb",
     storageBucket: "react-blog-b29eb.appspot.com",
@@ -19,6 +21,7 @@ const postImgRef = ref(storageRef, 'post_imgs')
 
 export const uploadFile = async (file) => {
     try {
+        console.log(firebaseKey);
         const uploadRef = ref(postImgRef, v4());
         await uploadBytes(uploadRef, file);
         const url = await getDownloadURL(uploadRef);

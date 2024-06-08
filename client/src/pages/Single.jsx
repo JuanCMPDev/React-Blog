@@ -18,8 +18,6 @@ const Single = () => {
 
   const location = useLocation().pathname;
   const postId = location.split('/').pop();
-  
-  console.log(postId);
 
   const {currentUser} = useContext(AuthContext);
 

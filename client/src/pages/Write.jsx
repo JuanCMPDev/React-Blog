@@ -95,7 +95,6 @@ const Write = () => {
             value={editableTitle}
             onChange={(e) => {
               setEditableTitle(e.target.value);
-              console.log(editableTitle);
             }}
           />
           <div className="editorContainer">
