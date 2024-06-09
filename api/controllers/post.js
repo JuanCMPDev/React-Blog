@@ -1,5 +1,5 @@
-import {db} from "../db.js";
-import jwt from "jsonwebtoken";
+const { db } = require("../db.js");
+const jwt = require("jsonwebtoken");
 
 export const getPosts = (req, res) => {
 

@@ -1,8 +1,8 @@
-import express from 'express';
-import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
-import postRoutes from "./routes/posts.js";
-import cookieParser from 'cookie-parser';
+const express = require('express');
+const authRoutes = require("./routes/auth.js");
+const userRoutes = require("./routes/users.js");
+const postRoutes = require("./routes/posts.js");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 8800;

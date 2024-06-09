@@ -1,7 +1,7 @@
-import {db} from '../db.js'
-import bcrypt from 'bcryptjs'
-import axios from 'axios'
-import jwt from 'jsonwebtoken'
+const { db } = require('../db.js');
+const bcrypt = require('bcryptjs');
+const axios = require('axios');
+const jwt = require('jsonwebtoken');
 
 const validateEmail = email => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
