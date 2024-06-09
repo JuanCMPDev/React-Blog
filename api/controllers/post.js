@@ -14,10 +14,10 @@ export const getPosts = (req, res) => {
     let params = [];
 
     if(category){
-        q = "SELECT * FROM blog.posts WHERE category=? AND id != ? ORDER BY date DESC LIMIT ? OFFSET ?";
+        q = "SELECT * FROM juanklzm_blog.posts WHERE category=? AND id != ? ORDER BY date DESC LIMIT ? OFFSET ?";
         params = [category, postId, perPage, offset];
     } else {
-        q = "SELECT * FROM blog.posts ORDER BY date DESC LIMIT ? OFFSET ?";
+        q = "SELECT * FROM juanklzm_blog.posts ORDER BY date DESC LIMIT ? OFFSET ?";
         params = [perPage, offset];
     }
 
@@ -26,8 +26,8 @@ export const getPosts = (req, res) => {
         if(err) return res.status(500).send(err);
 
         const totalPostQuery = category 
-        ? "SELECT COUNT(*) AS total FROM blog.posts WHERE category = ? AND id != ?" 
-        : "SELECT COUNT(*) AS total FROM blog.posts";
+        ? "SELECT COUNT(*) AS total FROM juanklzm_blog.posts WHERE category = ? AND id != ?" 
+        : "SELECT COUNT(*) AS total FROM juanklzm_blog.posts";
 
         db.query(totalPostQuery, category ? [category, postId] : [], (err, countData)=>{
             if(err) return res.status(500).send(err);
@@ -42,7 +42,7 @@ export const getPosts = (req, res) => {
 
 
 export const getPost = (req, res) => {
-    const q = "SELECT `username`, `title`, `description` , p.id ,p.img, u.img AS userImg, `category`, `date` FROM blog.users u JOIN blog.posts p ON u.id=p.user_id WHERE p.id = ?";
+    const q = "SELECT `username`, `title`, `description` , p.id ,p.img, u.img AS userImg, `category`, `date` FROM juanklzm_blog.users u JOIN juanklzm_blog.posts p ON u.id=p.user_id WHERE p.id = ?";
 
     db.query(q, [req.params.id], (err, data)=>{
         if(err) return res.status(500).json(err)
@@ -59,7 +59,7 @@ export const addPost = (req, res) => {
     jwt.verify(token, "chop_suey", (err, userInfo) => {
         if (err) return res.status(500).json("Token is not valid!");
 
-        const q = "INSERT INTO blog.posts(title, description, img, date, category, user_id) VALUES (?)";
+        const q = "INSERT INTO juanklzm_blog.posts(title, description, img, date, category, user_id) VALUES (?)";
 
         const values = [[
             req.body.title,
@@ -94,9 +94,9 @@ export const deletePost = (req, res) => {
         let q = "";
         
         if(userRole === 'admin'){
-            q = "DELETE FROM blog.posts WHERE id = ?";
+            q = "DELETE FROM juanklzm_blog.posts WHERE id = ?";
         }else{
-            q = "DELETE FROM blog.posts WHERE id = ? AND user_id = ?";
+            q = "DELETE FROM juanklzm_blog.posts WHERE id = ? AND user_id = ?";
         }
 
         db.query(q, [postId, userId], (err, data) => {
@@ -128,9 +128,9 @@ export const updatePost = (req, res) => {
         let q = ""
         
         if(userInfo.role === "admin"){
-            q = "UPDATE blog.posts SET `title`=? , `description`= ?, `img` = ?, `category` = ? WHERE `id` = ?";
+            q = "UPDATE juanklzm_blog.posts SET `title`=? , `description`= ?, `img` = ?, `category` = ? WHERE `id` = ?";
         } else {
-            q = "UPDATE blog.posts SET `title`=? , `description`= ?, `img` = ?, `category` = ? WHERE `id` = ? AND `user_id` = ?";
+            q = "UPDATE juanklzm_blog.posts SET `title`=? , `description`= ?, `img` = ?, `category` = ? WHERE `id` = ? AND `user_id` = ?";
         }
 
         const values = [

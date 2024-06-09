@@ -36,7 +36,7 @@ export const register = async (req, res) => {
             return res.status(400).json('Captcha verification failed.');
         }
 
-        const q = "SELECT * FROM blog.users WHERE email = ? OR username = ?;";
+        const q = "SELECT * FROM juanklzm_blog.users WHERE email = ? OR username = ?;";
         db.query(q, [email, username], (err, data) => {
             if (err) return res.status(500).json('Database error.');
             if (data.length) return res.status(409).json('User already exists!');
@@ -52,7 +52,7 @@ export const register = async (req, res) => {
                         return res.status(500).json('Error hashing password.');
                     }
                     const hashedPassword = hash;
-                    const q = "INSERT INTO blog.users(`username`, `email`, `password`, `role`) VALUES (?, ?, ?, ?)";
+                    const q = "INSERT INTO juanklzm_blog.users(`username`, `email`, `password`, `role`) VALUES (?, ?, ?, ?)";
                     const values = [username, email, hashedPassword, 'reader'];
 
                     db.query(q, values, (err, data) => {
@@ -73,7 +73,7 @@ export const register = async (req, res) => {
 
 export const login = (req, res) => {
     
-    const q = "SELECT username, password, id, role FROM blog.users WHERE username = ?;"
+    const q = "SELECT username, password, id, role FROM juanklzm_blog.users WHERE username = ?;"
     db.query(q, [req.body.username], (err, [data])=>{
         if(err) return res.json(err);
         if(data === undefined) return res.status(404).json('User not found!');
