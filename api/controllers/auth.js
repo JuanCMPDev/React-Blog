@@ -8,8 +8,7 @@ const validateEmail = email => {
     return re.test(String(email).toLowerCase());
 }
 
-export const register = async (req, res) => {
-
+const register = async (req, res) => {
     const { username, email, password, recaptchaToken } = req.body;
 
     if (!username || !email || !password || !recaptchaToken) {
@@ -71,41 +70,38 @@ export const register = async (req, res) => {
     }
 }
 
-export const login = (req, res) => {
-    
+const login = (req, res) => {
     const q = "SELECT username, password, id, role FROM juanklzm_blog.users WHERE username = ?;"
-    db.query(q, [req.body.username], (err, [data])=>{
-        if(err) return res.json(err);
-        if(data === undefined) return res.status(404).json('User not found!');
+    db.query(q, [req.body.username], (err, [data]) => {
+        if (err) return res.json(err);
+        if (data === undefined) return res.status(404).json('User not found!');
 
-
-        bcrypt.compare(req.body.password ,data.password)
-            .then((passwordCheck)=>{
-                if(!passwordCheck) return res.status(400).json('Wrong password');
-                const {password, id, ...other} = data;
-                jwt.sign({id: data.id, role: data.role}, 'chop_suey', (err, token)=>{
-                    if(err){
+        bcrypt.compare(req.body.password, data.password)
+            .then((passwordCheck) => {
+                if (!passwordCheck) return res.status(400).json('Wrong password');
+                const { password, id, ...other } = data;
+                jwt.sign({ id: data.id, role: data.role }, 'chop_suey', (err, token) => {
+                    if (err) {
                         console.log(err)
                         res.status(500).json('')
                     }
                     res.cookie('access_token', token, {
-                        httpOnly: true,
+                        secure: true,
+                        sameSite: 'None',
                     }).status(200).json(other)
-                });   
+                });
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.log(err)
                 return res.status(500).json('Server error: password check failed')
             })
-
-        
-
-
     })
 }
 
-export const logout = (req, res) => {
+const logout = (req, res) => {
     res.clearCookie("access_token", {
         httpOnly: true
     }).status(200).json("User has logged out")
 }
+
+module.exports = { register, login, logout };

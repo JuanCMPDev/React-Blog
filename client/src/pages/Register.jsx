@@ -3,6 +3,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Register = ({ pathname }) => {
   const [inputs, setInputs] = useState({
     username: '',
@@ -65,7 +67,7 @@ const Register = ({ pathname }) => {
       setError(null);
 
       try {
-        await axios.post('http://localhost:8800/api/auth/register', { ...inputs, recaptchaToken: token });
+        await axios.post(`${BACKEND_URL}auth/register`, { ...inputs, recaptchaToken: token }, { withCredentials: true });
         setTimeout(() => {
           navigate("/login");
         }, 1500);

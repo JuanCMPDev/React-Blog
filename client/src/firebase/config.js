@@ -21,7 +21,6 @@ const postImgRef = ref(storageRef, 'post_imgs')
 
 export const uploadFile = async (file) => {
     try {
-        console.log(firebaseKey);
         const uploadRef = ref(postImgRef, v4());
         await uploadBytes(uploadRef, file);
         const url = await getDownloadURL(uploadRef);
