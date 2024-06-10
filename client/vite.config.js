@@ -16,4 +16,5 @@ export default defineConfig({
   }
   },
   plugins: [react()],
+  base: 'https://JuanCMPDev.github.io/React-Blog',
 })
