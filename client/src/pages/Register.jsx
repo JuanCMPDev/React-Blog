@@ -83,20 +83,20 @@ const Register = ({ pathname }) => {
 
   return (
     <div className={`form-container register ${pathname === '/register' && 'active'}`}>
-      <h1>Register</h1>
+      <h1>Registro</h1>
       <form>
         <input required type="text" name='username' placeholder='Username' onChange={handleChange} />
         <input required type="email" name='email' placeholder='Email' onChange={handleChange} />
-        <input required type="password" name='password' placeholder='Password' onChange={handleChange} />
+        <input required type="password" name='password' placeholder='Contraseña' onChange={handleChange} />
         <ReCAPTCHA
           sitekey={reCaptchaKey}
           size='invisible'
           ref={recaptchaRef}
           onChange={onCaptchaChange}
         />
-        <button onClick={handleClick}>Sign up</button>
+        <button onClick={handleClick}>Registrame</button>
         {err && <p>{err}</p>}
-        <span>Already have an account? <br /><Link to='/login'>login!</Link></span>
+        <span>¿Ya tienes una cuenta? <br /><Link to='/login'>Ingresa</Link></span>
       </form>
     </div>
   );

@@ -74,7 +74,7 @@ const Home = () => {
               </Link>
               <p>{imprimirHastaPrimerPunto(getText(post.description))}</p>
               <Link to={`/post/${post.id}`}>
-                <button>Read more</button>
+                <button>Lee más</button>
               </Link>
             </div>
           </div>

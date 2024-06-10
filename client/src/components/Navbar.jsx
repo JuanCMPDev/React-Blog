@@ -5,7 +5,7 @@ import { AuthContext } from '../context/authContext';
 import { MdMenu } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 
-const links = ['News', 'Tutorials', 'Resources', 'Bootcamps'];
+const links = ['Tutoriales', 'Recursos', 'Opinión'];
 
 const Navbar = () => {
 
@@ -40,14 +40,14 @@ const Navbar = () => {
             {currentUser && (
               <>
                 <span className='session'>{currentUser.username}</span>
-                <span className='session' onClick={logout}>Log out</span>
+                <span className='session' onClick={logout}>Cerrar Sesión</span>
               </>
             )}
-            {!currentUser && <Link className='link' to="/login">Login</Link>}
+            {!currentUser && <Link className='link' to="/login">Ingresa</Link>}
           </div>
           {isAdminOrWriter && <Link className='link' to='/write'>
             <div className='write-button'>
-              Write
+              Post
             </div>
           </Link>}
           

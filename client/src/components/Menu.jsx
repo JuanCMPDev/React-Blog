@@ -36,7 +36,7 @@ const Menu = ({category, postId}) => {
   return (
     <div className="menu">
         <div className="sugerencies">
-          <h1>Related posts</h1>
+          <h1>Post relacionados</h1>
         </div>
         <div className="posts">
           {posts.map(post => (
@@ -44,7 +44,7 @@ const Menu = ({category, postId}) => {
                   <img src={post.img} alt="" />
                   <h2>{post.title}</h2>
                   <Link to={`/post/${post.id}`}>
-                    <button>Read More</button>
+                    <button>Lee más</button>
                   </Link>
                   <hr />
               </div>

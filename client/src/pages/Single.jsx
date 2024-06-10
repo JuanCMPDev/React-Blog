@@ -5,9 +5,13 @@ import { MdDelete, MdLogin } from "react-icons/md";
 import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
+import 'moment/locale/es';
 import { AuthContext } from '../context/authContext';
 import parse from 'html-react-parser';
 import { toast } from 'sonner';
+
+
+moment.locale('es');
 
 
 const Single = () => {
@@ -70,7 +74,7 @@ const Single = () => {
           {post.userImg && <img src={post.userImg} alt="post=profile-photo" />}
           <div className="info">
             <span>{post.username}</span>
-            <p>Posted {moment(post.date).fromNow()}</p>
+            <p>Posteado {moment(post.date).fromNow()}</p>
           </div>
           {currentUser !== null && isAdminOrOwner &&  <div className="edit">
             <Link to={`/write?edit=${postId}`} state={post}>

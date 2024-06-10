@@ -8,7 +8,7 @@ const Footer = () => {
         <img src={Logo} alt="logo" />
         <p>JuanCDEV</p>
       </div>
-      <span>Made in <b>React</b> ⚛️ <b>SQL</b> 💾 and <b>Express</b> 💻</span>
+      <span>Hecho en <b>React</b> ⚛️ <b>SQL</b> 💾 & <b>Express</b> 💻</span>
     </footer>
   )
 }

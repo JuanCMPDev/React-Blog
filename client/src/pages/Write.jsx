@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 
 
-const categories = ["news", "tutorials", "resources", "bootcamps"];
+const categories = ["tutoriales", "recursos", "opinión"];
 
 const Write = () => {
   const {currentUser, logout} = useContext(AuthContext);
@@ -95,7 +95,7 @@ const Write = () => {
         <div className="content">
         <input
             type="text"
-            placeholder="title"
+            placeholder="Título"
             value={editableTitle}
             onChange={(e) => {
               setEditableTitle(e.target.value);
@@ -112,12 +112,12 @@ const Write = () => {
         </div>
         <div className="menu">
           <div className="item">
-            <h1>Publish</h1>
+            <h1>Pubicación</h1>
             <span>
-              <b>Status: </b> Draft
+              <b>Estatus: </b> borrador
             </span>
             <span>
-              <b>Visibility: </b> public
+              <b>Visibilidad: </b> publica
             </span>
             <input
               style={{ display: "none" }}
@@ -126,17 +126,17 @@ const Write = () => {
               onChange={(e) => setFile(e.target.files[0])}
             />
             <label className="file " htmlFor="file">
-              Upload image
+              Selecciona una imagen
             </label>
             <div className="buttons">
-              <button>Save as a draft</button>
+              <button>Guarda como borrador</button>
               <button onClick={handleClick}>
-                {locationState ? "Update" : "Publish"}
+                {locationState ? "Actualiza" : "Publica"}
               </button>
             </div>
           </div>
           <div className="item">
-            <h1>Category</h1>
+            <h1>Categoría</h1>
             {categories.map((cat) => (
               <div className="cat" key={cat}>
                 <input

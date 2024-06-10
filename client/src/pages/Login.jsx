@@ -44,13 +44,13 @@ const Login = ({pathname}) => {
 
   return (
     <div className={`form-container sign-in ${pathname === '/register' && 'active'}`}>
-      <h1>Login</h1>
+      <h1>Ingresa</h1>
       <form>
         <input name="username" type="text" placeholder='Username' onChange={handleChange}/>
-        <input name="password" type="password" placeholder='Password' onChange={handleChange}/>
-        <button onClick={handleClick}>login</button>
+        <input name="password" type="password" placeholder='Contraseña' onChange={handleChange}/>
+        <button onClick={handleClick}>Inicia Sesión</button>
         {err && <p>{err}</p>}
-        <span>Don't you have an account? <br/> <Link to='/register'>register</Link></span>
+        <span>¿No tienes una cuenta? <br/> <Link to='/register'>registrate</Link></span>
       </form>
     </div>
   )

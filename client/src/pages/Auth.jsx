@@ -32,16 +32,16 @@ const Auth = () => {
         <div className={`toggle-container toggle-right ${pathname === '/register' && 'active'}`}>
           <div className="toggle">
             <div className={`toggle-panel toggle-right`}>
-              <h1>Hey there!</h1>
+              <h1>¿Cómo estás?</h1>
               <img src={loginImg} alt="login-image" className="login-img"/>
-              <p>It's nice to see you around</p>
-              <p className="small-screen">Sign in</p>
+              <p>Es bueno verte de vuelta</p>
+              <p className="small-screen">Ingresa</p>
             </div>
             <div className="toggle-panel toggle-left">
-              <h1>Welcome!</h1>
+              <h1>Bienvenido!</h1>
               <img src={logoutImg} alt="login-image" className="login-img"/>
-              <p>happy to see a new user</p>
-              <p className="small-screen">Register</p>
+              <p>Es bueno ver a un nuevo usuario</p>
+              <p className="small-screen">Registrate</p>
             </div>
           </div>
         </div>
