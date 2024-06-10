@@ -13,7 +13,7 @@ import { toast } from "sonner";
 const categories = ["news", "tutorials", "resources", "bootcamps"];
 
 const Write = () => {
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser, logout} = useContext(AuthContext);
   const navigate = useNavigate();
   const locationState = useLocation().state;
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -70,7 +70,11 @@ const Write = () => {
         toast.success("Post creado con exito.")
       }
     } catch (err) {
-      console.log(err);
+      if(err.response.status === 401){
+        logout();
+        toast.error("Se ha excedido el tiempo de tu sesión, inicia sesión nuvamente")
+        return;
+      };
       toast.error("Error al editar o elimar post", {
         description: err,
       })

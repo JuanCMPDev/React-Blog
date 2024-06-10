@@ -19,7 +19,7 @@ const Single = () => {
   const location = useLocation().pathname;
   const postId = location.split('/').pop();
 
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser, logout} = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -49,7 +49,11 @@ const Single = () => {
         navigate("/");
         toast.success("Post eliminado con exito.")
       } catch (err) {
-        console.log(err);
+        if(err.response.status === 401){
+          logout();
+          toast.error("Se ha excedido el tiempo de tu sesión, inicia sesión nuvamente")
+          return;
+        };
       }
     } else {
       return
