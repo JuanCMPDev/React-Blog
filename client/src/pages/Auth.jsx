@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import loginImg from "../img/loginimg.svg";
+import loginImg from "../img/loginImg.svg";
 import logoutImg from "../img/logoutImg.svg";
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'sonner';
