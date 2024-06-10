@@ -4,7 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import loginImg from "../img/loginimg.svg";
 import logoutImg from "../img/logoutImg.svg";
-import { AuthContext } from '../context/authContext';
+import { AuthContext } from '../context/AuthContext';
 import { toast } from 'sonner';
 
 const Auth = () => {

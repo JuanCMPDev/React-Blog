@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import Logo from '../img/code.svg'
-import { AuthContext } from '../context/authContext';
+import { AuthContext } from '../context/AuthContext';
 import { MdMenu } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 

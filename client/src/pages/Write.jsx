@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import moment from "moment";
 import { toast } from "sonner";
 

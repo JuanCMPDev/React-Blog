@@ -6,7 +6,7 @@ import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/es';
-import { AuthContext } from '../context/authContext';
+import { AuthContext } from '../context/AuthContext';
 import parse from 'html-react-parser';
 import { toast } from 'sonner';
 
