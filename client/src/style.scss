@@ -453,6 +453,8 @@ body {
 
             @include small-screen {
               flex-direction: column;
+              align-items: flex-start;
+              padding-right: 20px;
               gap: 0px;
             }
 
@@ -512,7 +514,6 @@ body {
 
               @include small-screen{
                 font-size: 14px;
-                padding-left: 44px;
               }
             }
 
@@ -522,9 +523,7 @@ body {
               margin-right: 20px;
 
               @include small-screen {
-                padding-top: 8px;
-                padding-right: 20px;
-                margin-right: 0;
+                padding-left: 0;;
               }
             }
           }
@@ -555,7 +554,7 @@ body {
             @include small-screen {
               margin-right: 0;
               margin-top: 20px;
-              margin-left: 21px;
+              margin-left: 4px;
               border-radius: 2.5px;
               width: 80px;
               height: 35px;
