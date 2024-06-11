@@ -508,14 +508,21 @@ body {
               padding-bottom: 0;
             }
 
+            span{
+
+              @include small-screen{
+                padding-left: 25px;
+              }
+            }
+
             a {
               padding-bottom: 3px;
-              padding-left: 21px;
+              padding-left: 10px;
               margin-right: 20px;
 
               @include small-screen {
                 padding-top: 8px;
-                padding-right: 33px;
+                padding-right: 20px;
                 margin-right: 0;
               }
             }
@@ -547,7 +554,7 @@ body {
             @include small-screen {
               margin-right: 0;
               margin-top: 20px;
-              margin-left: 5px;
+              margin-left: 21px;
               border-radius: 2.5px;
               width: 80px;
               height: 35px;
